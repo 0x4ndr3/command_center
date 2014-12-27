@@ -6,6 +6,7 @@ Python framework developed while reading <a href="http://www.amazon.com/Violent-
 You start by running the run.py which will take you to a "hub# " prompt.
 From there on you have the following command list:
 
+<pre>
 list
 	Description: lists all zombies inserted
 			 -c/--check checks for connectivity
@@ -51,7 +52,7 @@ help
 exit
 	Exit the interpreter.
 	You can also use the Ctrl-D shortcut
-
+</pre>
 <hr/>
 
 The bruteforce command is designed most specifically for the <b>Debian weak private keys</b> issue discovered in 2008, or as the Violent Python book states:

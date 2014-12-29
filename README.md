@@ -14,25 +14,25 @@ list
 
 add
 	Description: adds zombie host to botnet
-	usage: add -h <hostname> -u <user> -p <password> -P <port>
+	usage: add -h hostname -u user -p password -P <port>
 
 remove
 	Description: removes zombie host from botnet
-	usage: remove -h <hostname>
+	usage: remove -h hostname
 
 broadcast
 	Description: executes commands on all zombies
-	usage: broadcast <shell command>
+	usage: broadcast shell_command
 
 execute
 	Description: executes commandon spefic zombie
-	usage: execute <hostname> <shell command>
+	usage: execute hostname shell_command
 
 bruteforce
 	Description: bruteforces SSH credentials on specific host
-	usage: bruteforce [ --ssh -h <hostname> -u <user> -f <dictionary> [-p <port>] ]
-					| [ --ssh -h <hostname> -u <user> --pub -D <dir with keyfiles> [-p <port>] ]
-					| [ --zip -f <zipfile> -d <dictionary> ]
+	usage: bruteforce [ --ssh -h hostname -u user -f dictionary [-p port] ]
+					| [ --ssh -h hostname -u user --pub -D dir_with_keyfiles [-p port] ]
+					| [ --zip -f zipfile -d dictionary ]
 				
 save
 	Description: saves inserted zombies state into file state.vars
@@ -44,7 +44,7 @@ restore
 
 shell
 	Description: execute shell commands
-	Usage: shell <unix command>
+	Usage: shell unix_command
 
 help
 	List available commands with "help" or detailed help with "help cmd".				

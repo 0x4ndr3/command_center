@@ -10,41 +10,45 @@ From there on you have the following command list:
 list
 	Description: lists all zombies inserted
 			 -c/--check checks for connectivity
-	usage: list [-c]
+	Usage: list [-c]
 
 add
 	Description: adds zombie host to botnet
-	usage: add -h hostname -u user -p password -P <port>
+	Usage: add -h &lt;hostname&gt; -u &lt;user&gt; -p &lt;password&gt; -P &lt;port&gt;
 
 remove
 	Description: removes zombie host from botnet
-	usage: remove -h hostname
+	Usage: remove -h &lt;hostname&gt;
 
 broadcast
 	Description: executes commands on all zombies
-	usage: broadcast shell_command
+	Usage: broadcast &lt;shell command&gt;
 
 execute
 	Description: executes commandon spefic zombie
-	usage: execute hostname shell_command
+	Usage: execute &lt;hostname&gt; &lt;shell command&gt;
 
 bruteforce
 	Description: bruteforces SSH credentials on specific host
-	usage: bruteforce [ --ssh -h hostname -u user -f dictionary [-p port] ]
-					| [ --ssh -h hostname -u user --pub -D dir_with_keyfiles [-p port] ]
-					| [ --zip -f zipfile -d dictionary ]
+	Usage: bruteforce [ --ssh -h &lt;hostname&gt; -u &lt;user&gt; -f &lt;dictionary&gt; [-p &lt;port&gt;] ]
+					| [ --ssh -h &lt;hostname&gt; -u &lt;user&gt; --pub -D &lt;dir with keyfiles&gt; [-p &lt;port&gt;] ]
+					| [ --zip -f &lt;zipfile&gt; -d &lt;dictionary&gt; ]
+
+openrelay
+	Description: tests if a server is configured to relay emails coming from anywhere
+	Usage: openrelay -f &lt;sender email address&gt; -t &lt;receiver email address&gt; -s &lt;mail server&gt; -p &lt;port&gt;
 				
 save
 	Description: saves inserted zombies state into file state.vars
-	usage: save
+	Usage: save
 
 restore
 	Description: restores previously inserted zombies from file state.vars
-	usage: restore
+	Usage: restore
 
 shell
 	Description: execute shell commands
-	Usage: shell unix_command
+	Usage: shell &lt;unix command&gt;
 
 help
 	List available commands with "help" or detailed help with "help cmd".				

@@ -5,6 +5,9 @@ from cmd import *
 import os
 import re
 import pickle
+import socket, argparse, time , datetime, smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 CURRSTATEFILE = 'state.vars'
 
@@ -224,4 +227,50 @@ class MyCmdInterpreter(Cmd, shell_cmd, exit_cmd):
 				self.help_bruteforce()
 		except:
 			self.help_bruteforce()
-			return
+
+	def help_openrelay(self):
+		print 'Description: tests mail server for open relay vulnerability'
+		print 'usage: openrelay -f <fromaddr> -t <toaddr> -s <mailserver> -p <port> --malurl <url> [--starttls]'
+
+	def do_openrelay(self, s):
+		matches = re.findall(r'(--?[\w-]+)(.*?)(?= -|$)', s)
+		result = {}
+		for match in matches:
+			result[match[0]] = True if not match[1] else match[1].strip()
+		try:
+			fromaddr = result['-f']
+			toaddr = result['-t']
+			server = result['-s']
+			port = result['-p']
+			starttls = '--starttls' in result.keys()
+			malurl = result['--malurl']
+
+			msg = MIMEMultipart('alternative')
+			msg['Subject'] = "Breaking Stuff"
+			msg['From'] = fromaddr
+			msg['To'] = toaddr
+
+			emailbody = 'The email server ' + server + ' is configured to openrelay on port ' + port + '.'
+			mime = MIMEText(emailbody)
+			msg.attach(mime)
+			print "[!] email built"
+
+			try:
+				server = smtplib.SMTP(server + ':' + port)
+				if starttls:
+					server.starttls()
+				server.sendmail(fromaddr, toaddr, msg.as_string())
+				server.quit()
+			except socket.error:
+				print "[-] Problem connecting to mail server " + server + " at port " + port
+			except smtplib.SMTPRecipientsRefused:
+				print "[-]The mail server did not accept the recipient email address."
+			except:
+				print "[-] Unexpected error - possibly invalid emails inserted as from and to fields."
+				print "[!] Please report an issue to the github repository."
+			else:
+				print "[+] Successfully submitted email!"
+			finally:
+				print
+		except:
+			self.help_openrelay()
